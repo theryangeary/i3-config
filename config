@@ -9,6 +9,8 @@
 # layout, use the i3-config-wizard
 #
 
+set $mod Mod1
+
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
 font pango:monospace 8
@@ -55,10 +57,11 @@ bindsym Mod1+$up focus up
 bindsym Mod1+$right focus right
 
 # alternatively, you can use the cursor keys:
-bindsym Mod1+Left focus left
-bindsym Mod1+Down focus down
-bindsym Mod1+Up focus up
-bindsym Mod1+Right focus right
+# DISABLING FOR BROWSER NAVIGATION
+# bindsym Mod1+Left focus left
+# bindsym Mod1+Down focus down
+# bindsym Mod1+Up focus up
+# bindsym Mod1+Right focus right
 
 # move focused window
 bindsym Mod1+Shift+$left move left
@@ -183,7 +186,7 @@ bindsym XF86AudioPrev exec playerctl previous
 
 exec --no-startup-id xautolock -time 4 -locker "i3lock-wrapper -l"
 
-set $Locker i3lock -l && sleep 1
+set $Locker i3lock 
 
 set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
 mode "$mode_system" {
@@ -198,7 +201,7 @@ mode "$mode_system" {
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
-bindsym $mod+Escape mode "$mode_system"
+bindsym Mod1+Escape mode "$mode_system"
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
