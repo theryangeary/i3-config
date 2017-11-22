@@ -193,6 +193,22 @@ mode "resize" {
 
 bindsym Mod1+r mode "resize"
 
+# i3-gaps configuration
+set $mode_gaps Gaps: Inner Gaps: Up/Down, Outer Gaps: Left/Right
+mode "$mode_gaps" {
+	bindsym Up	gaps inner all plus 5
+	bindsym Down	gaps inner all minus 5
+	bindsym Left	gaps outer all minus 5
+	bindsym Right	gaps outer all plus 5
+	bindsym 0	gaps inner all set 0, gaps outer all set 0
+
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+}
+bindsym Mod1+Shift+g mode "$mode_gaps"
+gaps inner 10
+for_window [class="^.*"] border pixel 0
+
 # Widow Colours
 #                       border  background text    indicator
 client.focused          $base01 $base01    $base07 $base0F
