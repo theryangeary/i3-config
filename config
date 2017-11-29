@@ -165,7 +165,7 @@ bindsym Mod1+Shift+r restart
 bindsym Mod1+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 #set $Locker exec --no-startup-id i3lock --color "$base01"
-bindsym $mod+Shift+x exec i3lock --color "$base01"
+bindsym $mod+Shift+x exec lock
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -257,7 +257,7 @@ bindsym XF86AudioPrev exec playerctl previous
 
 exec --no-startup-id xautolock -time 4 -locker "i3lock-wrapper -l"
 
-set $Locker i3lock 
+set $Locker lock
 
 set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
 mode "$mode_system" {
@@ -283,4 +283,5 @@ bindsym Mod1+Escape mode "$mode_system"
 exec compton -f
 exec "xinput set-prop \"SynPS/2 Synaptics TouchPad\" \"Synaptics Palm Detection\" 1"
 exec "xinput set-prop \"SynPS/2 Synaptics TouchPad\" \"Synaptics Palm Dimensions\" 3, 3"
+exec feh --bg-scale Pictures/Wallpapers/bg.jpg
 
