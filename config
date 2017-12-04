@@ -240,6 +240,8 @@ bar {
 # natural scrolling
 exec --no-startup-id synclient NaturalScrolling=1 VertScrollDelta=-113
 
+focus_follows_mouse no
+
 # multimedia keys
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
