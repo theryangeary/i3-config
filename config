@@ -207,11 +207,11 @@ mode "$mode_gaps" {
 }
 bindsym Mod1+Shift+g mode "$mode_gaps"
 gaps inner 10
-for_window [class="^.*"] border pixel 0
+for_window [class="^.*"] border pixel 1
 
 # Widow Colours
 #                       border  background text    indicator
-client.focused          $base01 $base01    $base07 $base0F
+client.focused          $base01 $base01    $base07 $base0F #bbbbbb
 client.focused_inactive $base02 $base02    $base03 $base0F
 client.unfocused        $base02 $base02    $base03 $base0F
 client.urgent 		$base02 $base08    $base00 $base0F
