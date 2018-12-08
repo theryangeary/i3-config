@@ -230,29 +230,13 @@ client.focused_inactive $base02 $base02    $base03 $base0F
 client.unfocused        $base02 $base02    $base03 $base0F
 client.urgent 		$base02 $base08    $base00 $base0F
 
-#bar {
-#  #status_command i3status
-#  #status_command i3blocks #-c ~/.i3/i3blocks.conf
-#
-#  font pango: System San Francisco Display 10
-#  position top
-#  #strip_workspace_numbers yes
-#  #bindsym button4 nop
-#  #bindsym button5 nop
-#  colors {
-#      separator $base03
-#      background $base01
-#      statusline $base05
-##                        border  background text
-#      focused_workspace  $base01 $base01    $base07
-#      active_workspace   $base01 $base02    $base03
-#      inactive_workspace $base01 $base01    $base03
-#      urgent_workspace   $base01 $base01    $base08
-#  }
-#}
-
 # natural scrolling
-exec --no-startup-id synclient NaturalScrolling=1 VertScrollDelta=-113
+exec --no-startup-id synclient NaturalScrolling=1 VertScrollDelta=-113 HorizScrollDelta=-109 PalmDetect=1
+# horizontal scrolling
+exec --no-startup-id xinput --set-prop 15 "Synaptics Two-Finger Scrolling" 1 1
+# palm detection
+#exec-always "xinput set-prop \"SynPS/2 Synaptics TouchPad\" \"Synaptics Palm Detection\" 1"
+#exec-always "xinput set-prop \"SynPS/2 Synaptics TouchPad\" \"Synaptics Palm Dimensions\" 3, 3"
 
 focus_follows_mouse no
 
@@ -272,13 +256,13 @@ bindsym XF86AudioNext exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer
 
 exec --no-startup-id xautolock -time 4 -locker "i3lock-wrapper -l"
 
-set $Locker "lock -f 'Century-Schoolbook-L-Italic' -t 'Begone!'"
-set $Sleep  "lock -f 'Century-Schoolbook-L-Italic' -t 'Begone!' && systemctl suspend"
+set $Locker "i3lock-fancy -f 'Century-Schoolbook-L-Italic' "
+set $Sleep  "i3lock-fancy -f 'Century-Schoolbook-L-Italic' && systemctl suspend"
 
 set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
 mode "$mode_system" {
     bindsym l exec --no-startup-id $Locker, mode "default"
-    bindsym e exec --no-startup-id i3-msg exit, mode "default
+    bindsym e exec --no-startup-id i3-msg exit, mode "default"
     bindsym s exec --no-startup-id $Sleep, mode "default"
     bindsym h exec --no-startup-id '$Locker && systemctl hibernate', mode "default"
     bindsym r exec --no-startup-id systemctl reboot, mode "default"
@@ -290,8 +274,8 @@ mode "$mode_system" {
 }
 bindsym $mod+Escape mode "$mode_system"
 
-bindsym $mod+Shift+s exec "import -window root capture.jpg"
-bindsym $mod+Ctrl+s exec "~/screenshot.sh"
+bindsym $mod+Print exec "import Pictures/Screenshots/capture`date +%s`.jpg"
+bindsym Print exec "~/screenshot.sh"
 
 bindsym Ctrl+Mod1+Mod4+b exec "~/.screenlayout/bedroom.sh"
 bindsym Ctrl+Mod1+Mod4+d exec "~/.screenlayout/default.sh" 
@@ -301,19 +285,22 @@ bindsym Ctrl+Mod1+Mod4+n exec "nautilus &"
 bindsym Ctrl+Mod1+Mod4+s exec "spotify &"
 bindsym Ctrl+Mod1+Mod4+e exec "emacs &"
 
-#bar {
-#        status_command i3status
-#}
+#exec --no-startup-id i3-msg 'workspace 1; exec emacs &'
+#exec --no-startup-id i3-msg 'workspace 2; exec i3-sensible-terminal &'
+#exec --no-startup-id i3-msg 'workspace 3; exec firefox &'
+#exec --no-startup-id i3-msg 'workspace 9; exec slack &'
+#exec --no-startup-id i3-msg 'workspace 10; exec spotify &'
+exec --no-startup-id 'guake &'
+exec_always --no-startup-id "xmodmap -e \"keycode 135 = Super_R\""
+exec_always --no-startup-id "xset r rate 250 30"
 
-exec --no-startup-id i3-msg 'workspace 1; exec emacs'
-exec --no-startup-id i3-msg 'workspace 2; exec i3-sensible-terminal'
-exec --no-startup-id i3-msg 'workspace 3; exec firefox'
-exec --no-startup-id i3-msg 'workspace 10; exec spotify'
+for_window [instance="guake"] floating enable
 
 exec --no-startup-id "~/update-hosts.sh"
-exec "compton -f -r 15 -m 0.95 -c -C -z -o 0.5 --shadow-offset-y=-20 --shadow-offset-x=-20 --shadow-red 1 --shadow-blue 1 --shadow-green 1 --shadow-exclude \"! focused\"" 
-exec-always "xinput set-prop \"SynPS/2 Synaptics TouchPad\" \"Synaptics Palm Detection\" 1"
-exec-always "xinput set-prop \"SynPS/2 Synaptics TouchPad\" \"Synaptics Palm Dimensions\" 3, 3"
-exec_always feh --bg-fill Pictures/Wallpapers/bg.jpg
-#exec "polybar example"
+exec "compton --config /dev/null --backend glx -f -r 15 -m 0.95 -c -C -z -o 1 --shadow-offset-y=-20 --shadow-offset-x=-20 --shadow-red 1 --shadow-blue 1 --shadow-green 1 --shadow-exclude \"! focused\"" 
+exec_always feh --bg-fill ~/Pictures/Wallpapers/bg.jpg
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+exec --no-startup-id /usr/lib/gnome-settings-daemon-gsd-xsettings
+exec_always --no-startup-id gnome-power-manager
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec --no-startup-id gnome-flashback
