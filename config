@@ -13,8 +13,8 @@ set $mod Mod4
 
 set $base00 #101218
 set $base01 #303030
-set $base02 #808080
-set $base03 #303030
+set $base02 #1c1c1c
+set $base03 #808080
 set $base04 #C0C5CE
 set $base05 #d1d4e0
 set $base06 #C9CCDB
@@ -221,7 +221,7 @@ mode "$mode_gaps" {
 }
 bindsym $mod+Shift+g mode "$mode_gaps"
 gaps inner 0
-for_window [class="^.*"] border pixel 1 #808080
+for_window [class="^.*"] border pixel 1 $base03
 
 # Widow Colours
 #                       border  background text    indicator
