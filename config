@@ -12,9 +12,9 @@
 set $mod Mod4
 
 set $base00 #101218
-set $base01 #1f222d
-set $base02 #252936
-set $base03 #7780a1
+set $base01 #303030
+set $base02 #808080
+set $base03 #303030
 set $base04 #C0C5CE
 set $base05 #d1d4e0
 set $base06 #C9CCDB
@@ -210,25 +210,25 @@ bindsym $mod+r mode "resize"
 # i3-gaps configuration
 set $mode_gaps Gaps: Inner Gaps: Up/Down, Outer Gaps: Left/Right
 mode "$mode_gaps" {
-	bindsym Up	gaps inner all plus 5
-	bindsym Down	gaps inner all minus 5
-	bindsym Left	gaps outer all minus 5
-	bindsym Right	gaps outer all plus 5
-	bindsym 0	gaps inner all set 0, gaps outer all set 0
+  bindsym Up    gaps inner all plus 5
+  bindsym Down  gaps inner all minus 5
+  bindsym Left  gaps outer all minus 5
+  bindsym Right gaps outer all plus 5
+  bindsym 0	gaps inner all set 0, gaps outer all set 0
 
-	bindsym Return mode "default"
-	bindsym Escape mode "default"
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
 }
 bindsym $mod+Shift+g mode "$mode_gaps"
-gaps inner 20
-for_window [class="^.*"] border pixel 0
+gaps inner 0
+for_window [class="^.*"] border pixel 1 #808080
 
 # Widow Colours
 #                       border  background text    indicator
 client.focused          $base01 $base01    $base07 $base0F #bbbbbb
 client.focused_inactive $base02 $base02    $base03 $base0F
 client.unfocused        $base02 $base02    $base03 $base0F
-client.urgent 		$base02 $base08    $base00 $base0F
+client.urgent           $base02 $base08    $base00 $base0F
 
 # natural scrolling
 exec --no-startup-id synclient NaturalScrolling=1 VertScrollDelta=-113 HorizScrollDelta=-109 PalmDetect=1
@@ -286,20 +286,14 @@ bindsym Ctrl+Mod1+Mod4+s exec "spotify &"
 bindsym Ctrl+Mod1+Mod4+e exec "emacs &"
 bindsym Ctrl+Mod1+Mod4+v exec "export NVIM_GTK_NO_WINDOW_DECORATION=1; /usr/local/bin/nvim-gtk"
 
-#exec --no-startup-id i3-msg 'workspace 1; exec emacs &'
-#exec --no-startup-id i3-msg 'workspace 2; exec i3-sensible-terminal &'
-#exec --no-startup-id i3-msg 'workspace 3; exec firefox &'
-#exec --no-startup-id i3-msg 'workspace 9; exec slack &'
-#exec --no-startup-id i3-msg 'workspace 10; exec spotify &'
-exec --no-startup-id 'guake &'
+exec --no-startup-id guake
 exec_always --no-startup-id "xmodmap -e \"keycode 135 = Super_R\""
 exec_always --no-startup-id "xset r rate 250 30"
 
 for_window [instance="guake"] floating enable
 for_window [instance="gnome-calculator"] floating enable
 
-exec --no-startup-id "~/update-hosts.sh"
-exec "compton --config /dev/null --backend glx -f -r 15 -m 0.95 -c -C -z -o 1 --shadow-offset-y=-20 --shadow-offset-x=-20 --shadow-red 1 --shadow-blue 1 --shadow-green 1 --shadow-exclude \"! focused\""
+exec "compton --config /dev/null --backend glx -f -C "
 exec_always feh --bg-fill ~/Pictures/Wallpapers/bg.jpg
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec --no-startup-id /usr/lib/gnome-settings-daemon-gsd-xsettings

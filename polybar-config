@@ -1,6 +1,8 @@
 [colors]
-black = #000
+black = #1c1c1c
 white = #fff
+grey = #d0d0d0
+dark-grey = #808080
 
 casper = #aabbcc
 pale-sky = #667788
@@ -11,7 +13,6 @@ goldenrod = #997733
 wood-bark = #221100
 saddle = #443322
 
-grey = #778899
 fiord = #445566
 forest-green = #334422
 willow-grove = #667755
@@ -60,17 +61,8 @@ font-3 = "Font Awesome 5 Brands:pixelsize=12;3"
 ; COLORS ;
 ;--------;
 
-background-0 = #ff000000
-background-1 = #dd000000
-background-2 = #bb000000
-background-3 = #99000000
-background-4 = #88000000
-background-5 = #77000000
-background-6 = #66000000
-background-7 = #55000000
-background-8 = #33000000
-background-9 = #11000000
-foreground = ${colors.tan}
+background = ${colors.black}
+foreground = ${colors.grey}
 border-color = 0
 
 ;---------------;
@@ -154,8 +146,8 @@ pin-workspaces = true
 strip-wsnumbers = true
 enable-scroll = false
 
-label-unfocused-foreground = ${colors.pale-oyster}
-label-focused-foreground = ${colors.tan}
+label-unfocused-foreground = ${colors.dark-grey}
+label-focused-foreground = ${colors.grey}
 label-urgent-foreground = ${colors.urgent-pink}
 
 [module/time]
