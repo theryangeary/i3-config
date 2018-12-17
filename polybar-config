@@ -1,0 +1,300 @@
+[colors]
+black = #000
+white = #fff
+
+casper = #aabbcc
+pale-sky = #667788
+olive-green = #334400
+light-green = #667711
+finch = #666644
+goldenrod = #997733
+wood-bark = #221100
+saddle = #443322
+
+grey = #778899
+fiord = #445566
+forest-green = #334422
+willow-grove = #667755
+tan = #bbbb99
+brown = #665544
+pale-oyster = #998877
+cocoa-bean = #442222
+urgent-pink = #c75692
+
+[bar/white]
+
+
+;------------;
+; DIMENSIONS ;
+;------------;
+
+width = 100%
+height = 30
+offset-y = 0
+offset-x = 0
+
+border-top-size = 0
+border-bottom-size = 0
+border-right-size = 0
+border-left-size = 0
+
+;----------;
+; LOCATION ;
+;----------;
+
+bottom = false
+monitor = ${env:MONITOR:}
+wm-restack = none
+override-redirect = false
+
+;-------;
+; FONTS ;
+;-------;
+
+font-0 = Hack:size=10;3
+font-1 = "Font Awesome 5 Free:style=Solid:pixelsize=12;3"
+font-2 = "Font Awesome 5 Free:style=Regular:pixelsize=12;3"
+font-3 = "Font Awesome 5 Brands:pixelsize=12;3"
+
+;--------;
+; COLORS ;
+;--------;
+
+background-0 = #ff000000
+background-1 = #dd000000
+background-2 = #bb000000
+background-3 = #99000000
+background-4 = #88000000
+background-5 = #77000000
+background-6 = #66000000
+background-7 = #55000000
+background-8 = #33000000
+background-9 = #11000000
+foreground = ${colors.tan}
+border-color = 0
+
+;---------------;
+; MISCELLANEOUS ;
+;---------------;
+
+fixed-center = true
+padding-left = 2
+padding-right = 2
+module-margin = 1
+
+modules-left = volume backlight battery WVUD
+modules-center = i3
+modules-right = memory cpu filesystem wlan network date time
+
+tray-position = none
+tray-detached = true
+
+[bar/mpd]
+;------------;
+; DIMENSIONS ;
+;------------;
+
+width = 100%
+height = 20
+offset-y = 0
+offset-x = 0
+
+border-top-size = 10
+border-bottom-size = 0
+border-right-size = 10
+border-left-size = 10
+
+;----------;
+; LOCATION ;
+;----------;
+
+bottom = true
+monitor = eDP-1
+wm-restack = none
+override-redirect = false
+
+;-------;
+; FONTS ;
+;-------;
+
+font-0 = Hack:size=10;3
+font-1 = "Font Awesome 5 Free:style=Solid:pixelsize=10;3"
+font-2 = "Font Awesome 5 Free:style=Regular:pixelsize=10;3"
+font-3 = "Font Awesome 5 Brands:pixelsize=10;3"
+
+;--------;
+; COLORS ;
+;--------;
+
+background = 0
+foreground = ${colors.white}
+border-color = 0
+
+;---------------;
+; MISCELLANEOUS ;
+;---------------;
+fixed-center = true
+padding-left = 2
+padding-right = 2
+module-margin = 1.5
+
+;modules-left =
+modules-center = mpd
+;modules-right =
+
+
+;---------;
+; MODULES ;
+;---------;
+
+[module/i3]
+type = internal/i3
+
+pin-workspaces = true
+strip-wsnumbers = true
+enable-scroll = false
+
+label-unfocused-foreground = ${colors.pale-oyster}
+label-focused-foreground = ${colors.tan}
+label-urgent-foreground = ${colors.urgent-pink}
+
+[module/time]
+type = internal/date
+
+interval = 1.0
+
+date =  %H:%M
+
+[module/date]
+type = internal/date
+date =  %e %B - %A
+label = %date%
+
+
+[module/battery]
+type = internal/battery
+
+battery = BAT0
+adapter = ADP1
+
+poll-interval = 1
+
+full-at = 98
+
+label-discharging = %percentage%%
+label-charging = %percentage%%
+label-full = %percentage%%
+
+format-discharging = <ramp-capacity> <label-discharging>
+format-full = <ramp-capacity> <label-full>
+format-charging =  <label-charging>
+
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
+
+[module/volume]
+type = internal/volume
+
+format-volume = <ramp-volume> <label-volume>
+format-muted =  0%
+
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 
+
+[module/mpd]
+type = internal/mpd
+
+label-offline = mpd is offline
+format-online = <icon-prev> <toggle> <icon-next> <label-song>
+format-offline = <label-offline>
+host = 127.0.0.1
+port = 6600
+icon-prev = 
+icon-stop = 
+icon-play = 
+icon-pause = 
+icon-next = 
+
+label-song-maxlen = 25
+label-song-ellipsis = true
+
+bar-progress-width = 10
+bar-progress-indicator = |
+bar-progress-fill = ─
+bar-progress-empty = ─
+
+[module/backlight]
+type = internal/backlight
+
+; Use the following command to list available cards:
+; $ ls -1 /sys/class/backlight/
+card = intel_backlight
+
+format = <ramp> <label>
+
+label = %percentage%%
+
+ramp-0 = 🌕
+ramp-1 = 🌔
+ramp-2 = 🌓
+ramp-3 = 🌒
+ramp-4 = 🌑
+
+[module/wlan]
+type = internal/network
+
+interface = wlo1
+
+interval = 5
+
+label-connected =  %essid%
+label-disconnected =  Not Connected
+
+[module/cpu]
+type = internal/cpu
+label = %percentage%%
+format = <label> <ramp-coreload>
+ramp-coreload-spacing = 0
+
+ramp-coreload-0 = ▁
+ramp-coreload-1 = ▂
+ramp-coreload-2 = ▃
+ramp-coreload-3 = ▄
+ramp-coreload-4 = ▅
+ramp-coreload-5 = ▆
+ramp-coreload-6 = ▇
+ramp-coreload-7 = █
+
+[module/memory]
+type = internal/memory
+label =  %gb_used%
+
+[module/network]
+type = internal/network
+interface = wlo1
+label-connected =  %downspeed% |  %upspeed%
+
+[module/filesystem]
+type=internal/fs
+mount-0 = /
+format-mounted = <label-mounted>
+format-unmounted = <label-unmounted>
+label-mounted = /: %free% of %total%
+label-unmounted = %mountpoint%: not mounted
+
+[module/WVUD]
+type = custom/script
+click-left = "sensible-browser https://docs.google.com/spreadsheets/d/1sCN-yaiK4G-8R1lRn-QuAqhw3e3KGKzaDKhRgiztCfM/edit#gid=0"
+exec = "echo WVUD"
+
+[bar/float]
+
+inherit = bar/white
+
+background = #ffffff
+
+tray-position = center
