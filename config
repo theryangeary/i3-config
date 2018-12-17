@@ -50,11 +50,11 @@ font pango:System San Francisco Display 10
 
 # use these keys for focus, movement, and resize directions when reaching for
 # the arrows is not convenient
-# CHANGED TO VIM NAVIGATION 
+# CHANGED TO VIM NAVIGATION
 set $up k
 set $down j
 set $left h
-set $right l 
+set $right l
 
 # use Mouse+Mod1 to drag floating windows to their wanted position
 floating_modifier $mod
@@ -278,12 +278,13 @@ bindsym $mod+Print exec "import Pictures/Screenshots/capture`date +%s`.jpg"
 bindsym Print exec "~/screenshot.sh"
 
 bindsym Ctrl+Mod1+Mod4+b exec "~/.screenlayout/bedroom.sh"
-bindsym Ctrl+Mod1+Mod4+d exec "~/.screenlayout/default.sh" 
+bindsym Ctrl+Mod1+Mod4+d exec "~/.screenlayout/default.sh"
 bindsym Ctrl+Mod1+Mod4+c exec "chromium &"
 bindsym Ctrl+Mod1+Mod4+f exec "firefox &"
 bindsym Ctrl+Mod1+Mod4+n exec "nautilus &"
 bindsym Ctrl+Mod1+Mod4+s exec "spotify &"
 bindsym Ctrl+Mod1+Mod4+e exec "emacs &"
+bindsym Ctrl+Mod1+Mod4+v exec "export NVIM_GTK_NO_WINDOW_DECORATION=1; /usr/local/bin/nvim-gtk"
 
 #exec --no-startup-id i3-msg 'workspace 1; exec emacs &'
 #exec --no-startup-id i3-msg 'workspace 2; exec i3-sensible-terminal &'
@@ -295,9 +296,10 @@ exec_always --no-startup-id "xmodmap -e \"keycode 135 = Super_R\""
 exec_always --no-startup-id "xset r rate 250 30"
 
 for_window [instance="guake"] floating enable
+for_window [instance="gnome-calculator"] floating enable
 
 exec --no-startup-id "~/update-hosts.sh"
-exec "compton --config /dev/null --backend glx -f -r 15 -m 0.95 -c -C -z -o 1 --shadow-offset-y=-20 --shadow-offset-x=-20 --shadow-red 1 --shadow-blue 1 --shadow-green 1 --shadow-exclude \"! focused\"" 
+exec "compton --config /dev/null --backend glx -f -r 15 -m 0.95 -c -C -z -o 1 --shadow-offset-y=-20 --shadow-offset-x=-20 --shadow-red 1 --shadow-blue 1 --shadow-green 1 --shadow-exclude \"! focused\""
 exec_always feh --bg-fill ~/Pictures/Wallpapers/bg.jpg
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec --no-startup-id /usr/lib/gnome-settings-daemon-gsd-xsettings
